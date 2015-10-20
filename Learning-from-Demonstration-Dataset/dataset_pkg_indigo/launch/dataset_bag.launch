@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <!--<arg name="record_cameras" default="true" /> -->
+  <!--<arg name="record_robot" default="true" /> -->
+  <!--<arg name="record_MoCap" default="true" /> -->
+  <arg name="record_all" default="true" />
+  <arg name="session_name" default="no_session_specified" />
+  <arg name="session_time" default="no_time_specified" />
+  
+  <!-- VINBOT_BAG -->
+  <node pkg="rosbag" type="record" name="rosbag_record_cam"
+        args="-o /home/nbfigueroa/dataset/$(arg session_name)/$(arg session_time)/bagfiles/$(arg session_name) /KUKA/FT /KUKA/JointState /KUKA/Pose /KUKA/Stiff /camera/depth/image /camera/rgb/image_color /kinect2/depth_lowres/image /kinect2/rgb_lowres/image /rosout /rosout_agg /tf /tf_static"
+        if="$(arg record_all)" />
+ 
+</launch>
+<!--/KUKA/FT /KUKA/JointState /KUKA/Pose /KUKA/Stiff /camera/debayer/parameter_descriptions /camera/debayer/parameter_updates /camera/depth/camera_info
+/camera/depth/disparity /camera/depth/image /camera/depth/image/compressed /camera/depth/image/compressed/parameter_descriptions /camera/depth/image/compressed/parameter_updates
+/camera/depth/image/compressedDepth /camera/depth/image/compressedDepth/parameter_descriptions /camera/depth/image/compressedDepth/parameter_updates
+/camera/depth/image/theora /camera/depth/image/theora/parameter_descriptions /camera/depth/image/theora/parameter_updates /camera/depth/image_raw
+/camera/depth/image_raw/compressed /camera/depth/image_raw/compressed/parameter_descriptions /camera/depth/image_raw/compressed/parameter_updates
+/camera/depth/image_raw/compressedDepth /camera/depth/image_raw/compressedDepth/parameter_descriptions /camera/depth/image_raw/compressedDepth/parameter_updates
+/camera/depth/image_raw/theora /camera/depth/image_raw/theora/parameter_descriptions /camera/depth/image_raw/theora/parameter_updates
+/camera/depth/image_rect /camera/depth/image_rect/compressed /camera/depth/image_rect/compressed/parameter_descriptions
+/camera/depth/image_rect/compressed/parameter_updates /camera/depth/image_rect/compressedDepth /camera/depth/image_rect/compressedDepth/parameter_descriptions
+/camera/depth/image_rect/compressedDepth/parameter_updates /camera/depth/image_rect/theora /camera/depth/image_rect/theora/parameter_descriptions
+/camera/depth/image_rect/theora/parameter_updates /camera/depth/image_rect_raw /camera/depth/image_rect_raw/compressed
+/camera/depth/image_rect_raw/compressed/parameter_descriptions /camera/depth/image_rect_raw/compressed/parameter_updates
+/camera/depth/image_rect_raw/compressedDepth /camera/depth/image_rect_raw/compressedDepth/parameter_descriptions
+/camera/depth/image_rect_raw/compressedDepth/parameter_updates /camera/depth/image_rect_raw/theora /camera/depth/image_rect_raw/theora/parameter_descriptions
+/camera/depth/image_rect_raw/theora/parameter_updates /camera/depth/points /camera/depth_rectify_depth/parameter_descriptions
+/camera/depth_rectify_depth/parameter_updates /camera/depth_registered/camera_info /camera/depth_registered/disparity
+/camera/depth_registered/hw_registered/image_rect_raw /camera/depth_registered/hw_registered/image_rect_raw/compressed /camera/depth_registered/hw_registered/image_rect_raw/compressed/parameter_descriptions
+/camera/depth_registered/hw_registered/image_rect_raw/compressed/parameter_updates /camera/depth_registered/hw_registered/image_rect_raw/compressedDepth
+/camera/depth_registered/hw_registered/image_rect_raw/compressedDepth/parameter_descriptions /camera/depth_registered/hw_registered/image_rect_raw/compressedDepth/parameter_updates
+/camera/depth_registered/hw_registered/image_rect_raw/theora /camera/depth_registered/hw_registered/image_rect_raw/theora/parameter_descriptions
+/camera/depth_registered/hw_registered/image_rect_raw/theora/parameter_updates /camera/depth_registered/image_raw
+/camera/depth_registered/image_raw/compressed /camera/depth_registered/image_raw/compressed/parameter_descriptions
+/camera/depth_registered/image_raw/compressed/parameter_updates /camera/depth_registered/image_raw/compressedDepth
+/camera/depth_registered/image_raw/compressedDepth/parameter_descriptions /camera/depth_registered/image_raw/compressedDepth/parameter_updates
+/camera/depth_registered/image_raw/theora /camera/depth_registered/image_raw/theora/parameter_descriptions /camera/depth_registered/image_raw/theora/parameter_updates
+/camera/depth_registered/points /camera/depth_registered/sw_registered/camera_info /camera/depth_registered/sw_registered/image_rect_raw
+/camera/depth_registered/sw_registered/image_rect_raw/compressed /camera/depth_registered/sw_registered/image_rect_raw/compressed/parameter_descriptions
+/camera/depth_registered/sw_registered/image_rect_raw/compressed/parameter_updates /camera/depth_registered/sw_registered/image_rect_raw/compressedDepth
+/camera/depth_registered/sw_registered/image_rect_raw/compressedDepth/parameter_descriptions /camera/depth_registered/sw_registered/image_rect_raw/compressedDepth/parameter_updates
+/camera/depth_registered/sw_registered/image_rect_raw/theora /camera/depth_registered/sw_registered/image_rect_raw/theora/parameter_descriptions
+/camera/depth_registered/sw_registered/image_rect_raw/theora/parameter_updates /camera/depth_registered_rectify_depth/parameter_descriptions
+/camera/depth_registered_rectify_depth/parameter_updates /camera/driver/parameter_descriptions /camera/driver/parameter_updates
+/camera/ir/camera_info /camera/ir/image_raw /camera/ir/image_raw/compressed /camera/ir/image_raw/compressed/parameter_descriptions
+/camera/ir/image_raw/compressed/parameter_updates /camera/ir/image_raw/compressedDepth /camera/ir/image_raw/compressedDepth/parameter_descriptions
+/camera/ir/image_raw/compressedDepth/parameter_updates /camera/ir/image_raw/theora /camera/ir/image_raw/theora/parameter_descriptions
+/camera/ir/image_raw/theora/parameter_updates /camera/ir/image_rect_ir /camera/ir/image_rect_ir/compressed /camera/ir/image_rect_ir/compressed/parameter_descriptions
+/camera/ir/image_rect_ir/compressed/parameter_updates /camera/ir/image_rect_ir/compressedDepth /camera/ir/image_rect_ir/compressedDepth/parameter_descriptions
+/camera/ir/image_rect_ir/compressedDepth/parameter_updates /camera/ir/image_rect_ir/theora /camera/ir/image_rect_ir/theora/parameter_descriptions
+/camera/ir/image_rect_ir/theora/parameter_updates /camera/projector/camera_info /camera/rectify_color/parameter_descriptions
+/camera/rectify_color/parameter_updates /camera/rectify_ir/parameter_descriptions /camera/rectify_ir/parameter_updates
+/camera/rectify_mono/parameter_descriptions /camera/rectify_mono/parameter_updates /camera/rgb/camera_info /camera/rgb/image_color
+/camera/rgb/image_color/compressed /camera/rgb/image_color/compressed/parameter_descriptions /camera/rgb/image_color/compressed/parameter_updates
+/camera/rgb/image_color/compressedDepth /camera/rgb/image_color/compressedDepth/parameter_descriptions /camera/rgb/image_color/compressedDepth/parameter_updates
+/camera/rgb/image_color/theora /camera/rgb/image_color/theora/parameter_descriptions /camera/rgb/image_color/theora/parameter_updates
+/camera/rgb/image_mono /camera/rgb/image_mono/compressed /camera/rgb/image_mono/compressed/parameter_descriptions /camera/rgb/image_mono/compressed/parameter_updates
+/camera/rgb/image_mono/compressedDepth /camera/rgb/image_mono/compressedDepth/parameter_descriptions /camera/rgb/image_mono/compressedDepth/parameter_updates
+/camera/rgb/image_mono/theora /camera/rgb/image_mono/theora/parameter_descriptions /camera/rgb/image_mono/theora/parameter_updates
+/camera/rgb/image_raw /camera/rgb/image_raw/compressed /camera/rgb/image_raw/compressed/parameter_descriptions /camera/rgb/image_raw/compressed/parameter_updates
+/camera/rgb/image_raw/compressedDepth /camera/rgb/image_raw/compressedDepth/parameter_descriptions /camera/rgb/image_raw/compressedDepth/parameter_updates
+/camera/rgb/image_raw/theora /camera/rgb/image_raw/theora/parameter_descriptions /camera/rgb/image_raw/theora/parameter_updates
+/camera/rgb/image_rect_color /camera/rgb/image_rect_color/compressed /camera/rgb/image_rect_color/compressed/parameter_descriptions
+/camera/rgb/image_rect_color/compressed/parameter_updates /camera/rgb/image_rect_color/compressedDepth
+/camera/rgb/image_rect_color/compressedDepth/parameter_descriptions /camera/rgb/image_rect_color/compressedDepth/parameter_updates
+/camera/rgb/image_rect_color/theora /camera/rgb/image_rect_color/theora/parameter_descriptions /camera/rgb/image_rect_color/theora/parameter_updates
+/camera/rgb/image_rect_mono /camera/rgb/image_rect_mono/compressed /camera/rgb/image_rect_mono/compressed/parameter_descriptions
+/camera/rgb/image_rect_mono/compressed/parameter_updates /camera/rgb/image_rect_mono/compressedDepth
+/camera/rgb/image_rect_mono/compressedDepth/parameter_descriptions /camera/rgb/image_rect_mono/compressedDepth/parameter_updates
+/camera/rgb/image_rect_mono/theora /camera/rgb/image_rect_mono/theora/parameter_descriptions /camera/rgb/image_rect_mono/theora/parameter_updates
+/diagnostics /joint_states /kinect2/bond /kinect2/depth/camera_info /kinect2/depth/image /kinect2/depth/image/compressedDepth
+/kinect2/depth_highres/camera_info /kinect2/depth_highres/image /kinect2/depth_highres/image/compressedDepth /kinect2/depth_lowres/camera_info
+/kinect2/depth_lowres/image /kinect2/depth_lowres/image/compressedDepth /kinect2/depth_lowres/points /kinect2/depth_rect/camera_info
+/kinect2/depth_rect/image /kinect2/depth_rect/image/compressedDepth /kinect2/ir/camera_info /kinect2/ir/image /kinect2/ir/image/compressed
+/kinect2/ir_rect/camera_info /kinect2/ir_rect/image /kinect2/ir_rect/image/compressed /kinect2/mono/camera_info /kinect2/mono/image
+/kinect2/mono/image/compressed /kinect2/mono_lowres/camera_info /kinect2/mono_lowres/image /kinect2/mono_lowres/image/compressed /kinect2/mono_rect/camera_info
+/kinect2/mono_rect/image /kinect2/mono_rect/image/compressed /kinect2/rgb/camera_info /kinect2/rgb/image /kinect2/rgb/image/compressed /kinect2/rgb_lowres/camera_info
+/kinect2/rgb_lowres/image /kinect2/rgb_lowres/image/compressed /kinect2/rgb_rect/camera_info /kinect2/rgb_rect/image /kinect2/rgb_rect/image/compressed
+/rosout /rosout_agg /tf /tf_static-->

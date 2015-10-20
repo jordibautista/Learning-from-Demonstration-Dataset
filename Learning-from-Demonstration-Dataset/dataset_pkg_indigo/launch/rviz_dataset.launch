@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+ 
+  <!-- RVIZ_EPFL-LFDD -->
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false" output="screen" args="-d /home/nbfigueroa/.rviz/EPFL-LFDD.rviz"/>
+  
+</launch>

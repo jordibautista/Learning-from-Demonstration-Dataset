@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <arg name="session_name" default="no_session_name_specified"/>
+  <arg name="session_time" default="no_session_time_specified"/>
+  
+  <!-- start kinect node -->
+  <include file="$(find freenect_launch)/launch/freenect.launch"/>
+
+  <!-- start kinect2 node -->
+  <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch"/>
+
+  <!-- start MoCap node -->
+  <include file="$(find vision_pkg_indigo)/launch/example.launch"/>
+
+  <!-- start robot node -->
+  <include file="$(find robot_mirror)/launch/robot_mirror.launch"/>
+  
+  <!-- start model -->
+  <!-- <include file="$(find dataset_pkg_indigo)/launch/system_description.launch"/> -->
+  <include file="$(find kuka_lwr_bringup)/launch/lwr2_realtime_viz.launch"/>   
+  <include file="$(find kuka_lwr_bringup)/launch/world_to_camera_tf_broadcaster_dataset.launch"/> 
+    
+  <!-- start recording -->
+  <include file="$(find dataset_pkg_indigo)/launch/dataset_bag.launch">
+		<arg name="session_name" value="$(arg session_name)" />
+		<arg name="session_time" value="$(arg session_time)" />
+  </include>-->
+
+  <!-- start rviz -->
+  <include file="$(find dataset_pkg_indigo)/launch/rviz_dataset.launch"/>
+  
+</launch>
